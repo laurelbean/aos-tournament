@@ -4,6 +4,7 @@
   "description": "Use this to assist in running your own AoS Tournament",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --mode development",
     "test": "test"
   },
   "repository": {
