@@ -1,0 +1,19 @@
+{
+  "name": "aos-tournament",
+  "version": "1.0.0",
+  "description": "Use this to assist in running your own AoS Tournament",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurelbean/aos-tournament.git"
+  },
+  "author": "Laurel Bean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurelbean/aos-tournament/issues"
+  },
+  "homepage": "https://github.com/laurelbean/aos-tournament#readme"
+}
