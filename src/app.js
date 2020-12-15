@@ -55,15 +55,16 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <h1>Players</h1>
-                <input type="text" value={this.state.addedName} onChange={this.handleOnChange} />
-                <button onClick={this.addNewPlayer}>Add Player</button>
+                <h1>AoS Tournament Helper</h1>
+                <h2>Players</h2>
+                <input id="playerInput" type="text" value={this.state.addedName} onChange={this.handleOnChange} />
+                <button id="playerButton" onClick={this.addNewPlayer}>Add Player</button>
                 <ul>
                     {this.state.players.map(player => (
                         <li key={player}>{player}</li>
                     ))}
                 </ul>
-                <button onClick={this.createTournament}>Create Tournament</button>
+                <button id="tournamentButton" onClick={this.createTournament}>Create Tournament</button>
                 <ol>
                     {this.state.tournament.map((round, index) => {
                         console.log('round', round);
