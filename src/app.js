@@ -48,6 +48,7 @@ class App extends Component {
     }
 
     handleOnChange = (event) => {
+        let test = ``;
         this.setState({ addedName: event.target.value})
     }
 
@@ -68,7 +69,7 @@ class App extends Component {
                         console.log('round', round);
                         console.log('index', index);
                         console.log('round.player1', round.player1);
-                        return <li key={round.player1}>{round.player1 + ' vs ' + round.player2}</li>
+                        return <li key={index}>{`${round.player1} vs ${round.player2}`}</li>
                     })}
                 </ol>
             </Fragment>
