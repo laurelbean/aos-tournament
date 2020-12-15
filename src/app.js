@@ -7,34 +7,47 @@ class App extends Component {
         super(props);
         this.state = {
             addedName: '',
-            players: ['Laurel', 'Daniel'],
+            players: [],
+            tournament: []
         }
-        this.addNewPlayer = this.addNewPlayer.bind(this);
-        this.handleOnChange = this.handleOnChange.bind(this);
-        //this.createTournament = this.createTournament.bind(this);
     }
 
-    addNewPlayer() {
-        //console.log(name);
-        //const oldPlayers = this.state.players;
-        /*this.setState({
-            players: [oldPlayers, 'Daniel']
-        })*/
-        this.setState(state => {
-            const players = [...state.players, state.addedName];
-       
-            return {
-                addedName: '',
-                players
-            };
-        });
+    addNewPlayer = () => {
+        if (this.state.addedName) {
+            this.setState(state => {
+                const players = [...state.players, state.addedName];
+           
+                return {
+                    addedName: '',
+                    players
+                };
+            });
+        }
+        
     }
 
     createTournament = () => {
-        console.log('Needs implementing');
+        let playerList = this.state.players;
+        if (playerList.length % 2 === 1) {
+            playerList = [...playerList, 'The Ringer'];
+        }
+
+        let tournament = playerList.reduce((accumulator, currentValue, index) => {
+            if (index % 2 === 1) {
+                accumulator = [...accumulator, {player1: playerList[index-1], player2: playerList[index]}];
+            }
+            return accumulator;
+        }, []);
+        
+        this.setState(state => {
+            return {
+                ...state,
+                tournament: tournament
+            }
+        });
     }
 
-    handleOnChange(event) {
+    handleOnChange = (event) => {
         this.setState({ addedName: event.target.value})
     }
 
@@ -49,7 +62,15 @@ class App extends Component {
                         <li key={player}>{player}</li>
                     ))}
                 </ul>
-                <button>Create Tournament</button>
+                <button onClick={this.createTournament}>Create Tournament</button>
+                <ol>
+                    {this.state.tournament.map((round, index) => {
+                        console.log('round', round);
+                        console.log('index', index);
+                        console.log('round.player1', round.player1);
+                        return <li key={round.player1}>{round.player1 + ' vs ' + round.player2}</li>
+                    })}
+                </ol>
             </Fragment>
         );
     }
