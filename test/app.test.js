@@ -30,8 +30,77 @@ test('Display Add Player button', () => {
     expect(button.text()).toEqual('Add Player');
 });
 
+test('Display Player List', () => {
+    const appObj = shallow(<App/>);
+    const playerlist = appObj.find('.playerlist');
+    expect(playerlist.type()).toEqual('ul');
+});
+
+test('Add one player', () => {
+    const appObj = shallow(<App/>);
+    appObj.instance().setState({addedName: 'Laurel'});
+    appObj.instance().addNewPlayer();
+    const players = appObj.find('li');
+    expect(players.length).toEqual(1);
+})
+
+test('Add two players', () => {
+    const appObj = shallow(<App/>);
+    appObj.instance().setState({addedName: 'Laurel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().setState({addedName: 'Daniel'});
+    appObj.instance().addNewPlayer();
+    const players = appObj.find('li');
+    expect(players.length).toEqual(2);
+})
+
 test('Display Create Tournament button', () => {
     const appObj = shallow(<App/>);
     const button = appObj.find('#tournamentButton');
     expect(button.text()).toEqual('Create Tournament');
 })
+
+test('Display Tournament List', () => {
+    const appObj = shallow(<App/>);
+    const list = appObj.find('#tournamentList');
+    expect(list.type()).toEqual('ol');
+});
+
+test('Creating a tournament with 1 player', () => {
+    const appObj = shallow(<App/>);
+    appObj.instance().setState({addedName: 'Laurel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().createTournament();
+    //const list = appObj.find('#tournamentList');
+    const list = appObj.find('ol li');
+    expect(list.length).toEqual(1);
+    expect(list.text()).toEqual('Laurel vs The Ringer');
+});
+
+test('Creating a tournament with 2 players', () => {
+    const appObj = shallow(<App/>);
+    appObj.instance().setState({addedName: 'Laurel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().setState({addedName: 'Daniel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().createTournament();
+    //const list = appObj.find('#tournamentList');
+    const list = appObj.find('ol li');
+    expect(list.length).toEqual(1);
+    expect(list.text()).toEqual('Laurel vs Daniel');
+});
+
+test('Creating a tournament with 3 players', () => {
+    const appObj = shallow(<App/>);
+    appObj.instance().setState({addedName: 'Laurel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().setState({addedName: 'Daniel'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().setState({addedName: 'Zeke'});
+    appObj.instance().addNewPlayer();
+    appObj.instance().createTournament();
+    const list = appObj.find('ol li');
+    expect(list.length).toEqual(2);
+    const last = list.at(1);
+    expect(last.text()).toEqual('Zeke vs The Ringer');
+});

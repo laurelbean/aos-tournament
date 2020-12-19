@@ -59,17 +59,14 @@ class App extends Component {
                 <h2>Players</h2>
                 <input id="playerInput" type="text" value={this.state.addedName} onChange={this.handleOnChange} />
                 <button id="playerButton" onClick={this.addNewPlayer}>Add Player</button>
-                <ul>
+                <ul className="playerlist">
                     {this.state.players.map(player => (
-                        <li key={player}>{player}</li>
+                        <li className="player" key={player}>{player}</li>
                     ))}
                 </ul>
                 <button id="tournamentButton" onClick={this.createTournament}>Create Tournament</button>
-                <ol>
+                <ol id="tournamentList">
                     {this.state.tournament.map((round, index) => {
-                        console.log('round', round);
-                        console.log('index', index);
-                        console.log('round.player1', round.player1);
                         return <li key={index}>{`${round.player1} vs ${round.player2}`}</li>
                     })}
                 </ol>
